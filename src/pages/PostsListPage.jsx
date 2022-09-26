@@ -18,7 +18,9 @@ const PostsListPage = () => {
 
   return (
     <div>
-        posts
+        {posts.map((post, index) => {
+            return <p>{post.title}</p>
+        })}
     </div>
   )
 }
