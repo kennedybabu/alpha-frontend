@@ -1,4 +1,5 @@
 import React, {useState, useEffect} from 'react'
+import PostItem from '../components/PostItem'
 
 const PostsListPage = () => {
 
@@ -19,7 +20,7 @@ const PostsListPage = () => {
   return (
     <div>
         {posts.map((post, index) => {
-            return <p>{post.title}</p>
+            return <PostItem post={post} key={index}/>
         })}
     </div>
   )
