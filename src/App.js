@@ -1,9 +1,11 @@
-
+import Header from "./components/Header";
+import PostsListPage from "./pages/PostsListPage";
 
 function App() {
   return (
     <div>
-      <h2>hey</h2>
+      <Header />
+      <PostsListPage />
     </div>
   );
 }
