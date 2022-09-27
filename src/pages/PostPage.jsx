@@ -33,10 +33,21 @@ const PostPage = ({match, history}) => {
         history.push('/')
     }
 
+    let deletePost = async () => {
+        fetch(`/app/posts/${postId}/delete/`, {
+            method: "DELETE",
+            'headers': {
+                'Content-Type': 'application/json'
+            }
+        })
+        history.push('/')
+    }
+
   return (
     <div>
         <p>{post?.title}</p>
         <p onClick={() => setShow(!show)}>{show? 'hide' : 'update post'}</p>
+        <p onClick={deletePost}>X</p>
         { show ? 
             <form>
                 <input type="text" className='update-text' onChange={(e) => {setPost({...post, 'title': e.target.value})}}/>
