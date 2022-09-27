@@ -1,11 +1,15 @@
-import React from 'react'
+import React, {useState} from 'react'
+import { Link } from 'react-router-dom'
 
 const PostItem = ({post}) => {
+    const [on, setOn] = useState(false)
+
+
   return (
-    <div>
-        <h4>{post.type}</h4>
-        <p>{post.title}</p>
-    </div>
+    <Link to={`/post/${post.id}`}>
+        {/* <h4>{post.type}</h4> */}
+        <p>{post.title}</p>        
+    </Link>
   )
 }
 
