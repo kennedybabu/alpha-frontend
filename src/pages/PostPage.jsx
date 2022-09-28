@@ -12,6 +12,7 @@ const PostPage = ({match, history}) => {
 
 
     let getPost = async () => {
+        if(postId === 'new') return
         let response = await fetch(`/app/posts/${postId}/`)
         let data = await response.json()
         setPost(data)
@@ -28,8 +29,26 @@ const PostPage = ({match, history}) => {
         })
     }
 
+
+    // let createPost = async () => {
+    //     fetch(`/app/posts/create/`, {
+    //         method: "POST",
+    //         headers: {
+    //             'Content-Type': 'application/json'
+    //         },
+    //         body: JSON.stringify(post)
+    //     })
+    // }
+
+
     let handleSubmit = () => {
-        updatePost()
+        if(postId !== 'new' && post.body === "") {
+            deletePost()
+        } else if(postId !== 'new') {
+            updatePost()
+        } else if(postId === 'new' && post.body !== null) {
+            // createPost()
+        }        
         history.push('/')
     }
 
@@ -47,10 +66,15 @@ const PostPage = ({match, history}) => {
     <div>
         <p>{post?.title}</p>
         <p onClick={() => setShow(!show)}>{show? 'hide' : 'update post'}</p>
-        <p onClick={deletePost}>X</p>
+        
+        {postId !== 'new' ? (
+            <p onClick={deletePost}>delete</p>
+        ) : (
+            <p onClick={deletePost}>Done</p>
+        )}
         { show ? 
             <form>
-                <input type="text" className='update-text' onChange={(e) => {setPost({...post, 'title': e.target.value})}}/>
+                <input type="text" className='update-text' onChange={(e) => {setPost({...post, 'title': e.target.value})}} value={post?.title}/>
                 <button type='submit' onClick={handleSubmit}>update</button>
             </form>  
         : null
